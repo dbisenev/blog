@@ -45,6 +45,13 @@ const toggleSubscription = () => {
       <nuxt-link
           :to="`/chat/${person.id}`"
           v-if="isAuthenticated">Chat</nuxt-link>
+      <nuxt-link
+          :to="`/stats/${person.id}`"
+          v-if="isAuthenticated"
+      >
+        Stat
+      </nuxt-link>
+
 
     </div>
 
@@ -62,7 +69,9 @@ const toggleSubscription = () => {
     <div class="person-comments">
       <h3>Комментарии:</h3>
       <div class='comment' v-for="(comment, index) in comments" :key="index">
-        <p>{{ comment }}</p>
+        <p>Рейтинг: <star-rating :rating="comment.rating"/></p>
+        <p>{{ comment.text }}</p>
+        <p>{{ comment.date }}</p>
       </div>
     </div>
   </div>
@@ -161,32 +170,48 @@ const toggleSubscription = () => {
 }
 
 .person-comments {
-  background-color: #fff;
+  background-color: #ffffff;
   padding: 20px;
-  border-radius: 8px;
-  width: 100%;
-  max-width: 600px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  max-width: 700px;
+  margin: 20px auto;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05); /* Subtle shadow for a floating effect */
+  font-family: 'Roboto', sans-serif;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
 }
 
 .person-comments h3 {
-  font-size: 1.2rem;
-  color: #555;
-  margin-bottom: 1rem;
+  font-size: 1.4rem;
+  color: #333;
+  margin-bottom: 15px;
+  font-weight: 600; /* Slightly bolder title */
+  text-align: center; /* Center the title */
 }
 
 .comment {
-  background-color: #f4f4f4;
-  padding: 12px;
-  margin-bottom: 10px;
+  background-color: #f9f9f9; /* Light gray background */
+  padding: 15px;
+  margin-bottom: 15px;
   border-radius: 8px;
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1); /* Soft shadow for depth */
+  transition: transform 0.2s ease, box-shadow 0.2s ease; /* Smooth hover transition */
+}
+
+.comment:hover {
+  transform: scale(1.02); /* Slight zoom effect on hover */
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15); /* Deepens shadow on hover */
 }
 
 .comment p {
   font-size: 1rem;
-  color: #333;
-  margin: 0;
+  color: #555;
+  margin: 5px 0;
+}
+
+.comment p:first-child {
+  font-weight: 500; /* Slightly bold the rating line */
 }
 
 .heart-button {

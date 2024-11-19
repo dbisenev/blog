@@ -14,6 +14,8 @@
         <h3><strong>Email:</strong> {{ user.email }}</h3>
         <button class="button" @click="logout">Выйти</button>
         <button class="button" @click="goToSubscriptions">Мои подписки</button>
+        <button class="button" @click="goToEditProfile">Редактировать</button>
+        <button class="button" @click="goToFriends">Мои друзья</button>
       </div>
     </div>
   </div>
@@ -38,6 +40,13 @@ const logout = () => {
 // Переход на страницу подписок
 const goToSubscriptions = () => {
   router.push('/subscriptions')
+}
+const goToEditProfile = () =>{
+  router.push('/editProfile')
+}
+
+const goToFriends = () =>{
+  router.push('/friends')
 }
 </script>
 

@@ -19,6 +19,7 @@
     <!-- Глобальный футер -->
     <footer class="footer">
       <p>&copy; {{ currentYear }} Моя компания. Все права защищены.</p>
+      <p> {{ isAuthenticated }}</p>
     </footer>
   </div>
 </template>

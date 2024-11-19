@@ -10,8 +10,10 @@
     "postinstall": "nuxt prepare"
   },
   "dependencies": {
+    "chart.js": "^4.4.6",
     "lodash": "^4.17.21",
     "nuxt": "^3.14.159",
+    "uuid": "^11.0.3",
     "vue": "latest",
     "vue-router": "latest",
     "vuex": "^4.1.0"

@@ -6,10 +6,9 @@
             <div class="card-info">
               <h3>{{ person.PersonName }}</h3>
               <p><strong>Topic:</strong> {{ person.Topic }}</p>
-              <p><strong>Date:</strong> {{ person.PubDate }}</p>
+              <p><strong>Date:</strong> {{ person.RegisterDate }}</p>
               <p><strong>Rating:</strong></p>
                 <star-rating :rating="person.Rating"></star-rating>
-              <p><strong>Commentary:</strong> {{ person.Commentary[0] }}</p>
             </div>
 
        </nuxt-link>

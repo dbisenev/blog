@@ -17,6 +17,11 @@ const messages = computed(() => $store.getters.getChatMessages(id));
 
 // Состояние для ввода нового сообщения
 const newMessage = ref('');
+const allMessages = computed(() => {
+  const {incomeMessages, outcomeMessages} = $store.getters.getChatMessages(id);
+  return [...incomeMessages, ...outcomeMessages].sort((a,b) =>
+      new Date(a.timestamp).getTime() - new Date(b.timestamp).getTime());
+})
 
 // Функция для отправки нового сообщения
 const sendMessage = () => {
@@ -43,6 +48,7 @@ const sendMessage = () => {
     // Отправляем моковое сообщение в хранилище
     $store.dispatch('receiveMessage', { recipientId: id, content: mockMessage.content, senderId: recipient.value.id });
   }, 1500); // Задержка в 1.5 секунды для мокового сообщения
+  newMessage.value = ''
 };
 </script>
 
@@ -53,7 +59,7 @@ const sendMessage = () => {
     <div class="chat-window">
       <!-- История сообщений -->
       <div class="messages">
-        <div v-for="(message, index) in messages.incomeMessages.concat(messages.outcomeMessages)" :key="index"
+        <div v-for="(message, index) in allMessages" :key="index"
              :class="['message', { 'self': message.senderId === currentUser.id, 'other': message.senderId !== currentUser.id }]">
           <strong>{{ message.senderId === currentUser.id ? currentUser.firstName : recipient.PersonName }}</strong>
           <p>{{ message.content }}</p>
